@@ -1,0 +1,40 @@
+# ~/.config/yabai/yabairc 
+
+# event hook for enabling the dock injection for spaces management
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+yabai -m space 1 --label personal
+yabai -m space 2 --label spotify
+yabai -m space 3 --label terminal
+yabai -m space 4 --label slack
+yabai -m space 5 --label tasks
+yabai -m space 6 --label figma
+yabai -m space 7 --label lower_monitor_main
+
+# bsp, stack or float
+yabai -m config layout bsp
+
+yabai -m config window_placement second_child
+
+# padding
+yabai -m config window_gap 12
+yabai -m config top_padding 3
+yabai -m config bottom_padding 3
+yabai -m config right_padding 3
+yabai -m config left_padding 3
+
+# left padding to bottom screen to show times, reminders, and crypto tickers on desktop
+yabai -m config --space lower_monitor_main left_padding 190
+
+# mouse settings
+yabai -m config mouse_follows_focus on
+yabai -m config mouse_modifier alt
+# left click and drag
+yabai -m config mouse_action1 move  
+# right click and drag
+yabai -m config mouse_action2 resize
+yabai -m config mouse_drop_action swap
+
+# disable yabai for these apps
+# yabai -m rule --add app="^Discord$" manage=off

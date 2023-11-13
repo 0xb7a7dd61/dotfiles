@@ -1,0 +1,46 @@
+{
+    "natspec event": {
+        "prefix": "\/\/ nat_event",
+        "body": "\/**\r\n * @notice \r\n * @param \r\n *\/",
+        "description": "natspec for events"
+    },
+    "natspec struct": {
+        "prefix": "\/\/ nat_struct",
+        "body": "\/**\r\n * @dev \r\n * @param \r\n *\/",
+        "description": "natspec for structs"
+    },
+    "test function": {
+        "prefix": [
+            "tfunc"
+        ],
+        "body": [
+            "function test$1() public {",
+            "\t$0",
+            "}"
+        ],
+        "description": "A function for writing tests in forge"
+    },
+    "unit test": {
+        "prefix": [
+            "testcontract"
+        ],
+        "body": [
+            "// SPDX-License-Identifier: Unlicense",
+            "pragma solidity ^0.8.0;",
+            "",
+            "import { TestBase } from \"./utils/TestBase.sol\";",
+            "",
+            "import \"forge-std/console.sol\";",
+            "",
+            "contract $1Test is TestBase {",
+            "\t$0",
+            "\tfunction setUp() public {",
+            "\t}",
+            "",
+            "\tfunction test() public {",
+            "\t}",
+            "}"
+        ],
+        "description": "Template for new unit test files"
+    }
+}

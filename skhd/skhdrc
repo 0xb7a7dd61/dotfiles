@@ -1,0 +1,47 @@
+# ~/.config/skhd/skhdrc
+
+# start and stop
+ctrl + alt - q : yabai --stop-service
+ctrl + alt - s : yabai --start-service
+
+# changing window focus - right handed wasd equiv
+alt - u : yabai -m window --focus north
+alt - n : yabai -m window --focus west
+alt - e : yabai -m window --focus south
+alt - i : yabai -m window --focus east
+
+# rotate layout clockwise
+shift + alt - c : yabai -m space --rotate 270
+
+# rotate layout anti-clockwise
+shift + alt - a : yabai -m space --rotate 90
+
+# flip alone x-axis
+shift + alt - x : yabai -m space -- mirror x-axis
+
+# flip along y-axis
+shift + alt - y : yabai -m space --mirror y-axis
+
+# toggle window float
+shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+# zoom a window
+shift + alt - z : yabai -m window --toggle zoom-fullscreen
+
+# reset window size
+shift + alt - f : yabai -m space --balance
+
+alt - 9 : yabai -m display --focus 1
+alt - 0 : yabai -m display --focus 2
+
+# swap windows
+shift + alt - u : yabai -m window --swap north
+shift + alt - n : yabai -m window --swap west
+shift + alt - e : yabai -m window --swap south
+shift + alt - i : yabai -m window --swap east
+
+# move window and split
+ctrl + alt - u : yabai -m window --warp north
+ctrl + alt - n : yabai -m window --warp west
+ctrl + alt - e : yabai -m window --warp south
+ctrl + alt - i : yabai -m window --warp east
