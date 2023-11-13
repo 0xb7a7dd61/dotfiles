@@ -21,4 +21,7 @@ setup:
 	@echo Copying wezterm dotfiles...
 	cp $(PWD)/wezterm/.wezterm.lua ~/
 
+	@echo Copying zsh dotfiles...
+	cp $(PWD)/zsh/.zshrc ~/
+
 .PHONY:	setup
