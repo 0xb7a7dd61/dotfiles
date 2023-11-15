@@ -17,5 +17,11 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     desc = "Reload tmux config on save",
 })
 
--- autocmd bufwritepost .tmux.conf execute ':!tmux source-file %'
--- autocmd bufwritepost .tmux.local.conf execute ':!tmux source-file %'
+-- Disable the concealing in some file formats
+-- The default conceallevel is 3 in LazyVim
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "json", "jsonc", "markdown" },
+    callback = function()
+        vim.wo.conceallevel = 0
+    end,
+})
