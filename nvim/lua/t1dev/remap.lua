@@ -41,3 +41,7 @@ vim.keymap.set(
     [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = "Replace All Under Cursor" }
 )
+
+-- remap shift up/down to half screen scrolling
+vim.keymap.set("n", "<S-Up>", "<C-u>")
+vim.keymap.set("n", "<S-Down>", "<C-d>")
