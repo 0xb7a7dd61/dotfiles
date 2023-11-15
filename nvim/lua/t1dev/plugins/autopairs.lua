@@ -11,7 +11,7 @@ return {
             npairs.setup(opts)
 
             npairs.add_rules({
-                Rule("/*", " */"),
+                Rule("/*", " */", { "solidity" }),
             })
         end,
     },
