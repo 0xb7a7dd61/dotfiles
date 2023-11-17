@@ -2,6 +2,7 @@
 
 # start and stop
 ctrl + alt - q : yabai --stop-service
+ctrl + alt - r : yabai --stop-service;yabai --start-service
 ctrl + alt - s : yabai --start-service
 
 # changing window focus - right handed wasd equiv
