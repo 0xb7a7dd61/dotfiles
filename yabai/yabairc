@@ -26,6 +26,12 @@ yabai -m config left_padding 3
 
 # left padding to bottom screen to show times, reminders, and crypto tickers on desktop
 yabai -m config --space lower_monitor_main left_padding 190
+yabai -m signal --add event=window_created action="yabai -m config --space lower_monitor_main left_padding 190"
+yabai -m signal --add event=window_destroyed action="yabai -m config --space lower_monitor_main left_padding 190"
+yabai -m signal --add event=window_moved action="yabai -m config --space lower_monitor_main left_padding 190"
+yabai -m signal --add event=space_changed action="yabai -m config --space lower_monitor_main left_padding 190"
+yabai -m signal --add event=display_added action="yabai -m config --space lower_monitor_main left_padding 190"
+yabai -m signal --add event=display_removed action="yabai -m config --space lower_monitor_main left_padding 190"
 
 # mouse settings
 yabai -m config mouse_follows_focus on
