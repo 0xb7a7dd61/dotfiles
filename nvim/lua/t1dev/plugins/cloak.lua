@@ -22,5 +22,8 @@ return {
                 },
             },
         },
+        keys = {
+            { "<leader>te", "<cmd>CloakToggle<cr>", desc = "Toggle Cloak Hide" },
+        },
     },
 }
