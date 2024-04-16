@@ -1,11 +1,12 @@
 # ~/.config/yabai/yabairc 
 
+lower_monitor_left_padding='if [[ $(yabai -m query --displays --display $(yabai -m query --spaces --space 7 | jq ".display") | jq ".label") == "\"lower\"" ]]; then yabai -m space 7 --padding abs:0:0:195:0; fi'
 # event hook for enabling the dock injection for spaces management
 # must be before --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
-yabai -m config                                 \
+yabai -m config                               \
     window_placement          second_child    \
     window_gap                10              \
     top_padding               10              \
@@ -19,22 +20,46 @@ yabai -m config                                 \
     mouse_action2             resize          \
     mouse_drop_action         swap
 
-yabai -m space 1 --label personal --padding rel:0:0:0:0
-yabai -m space 2 --label spotify --padding rel:0:0:0:0
-yabai -m space 3 --label terminal --padding rel:0:0:0:0
-yabai -m space 4 --label slack --padding rel:0:0:0:0
-yabai -m space 5 --label tasks --padding rel:0:0:0:0
-yabai -m space 6 --label figma --padding rel:0:0:0:0
-yabai -m space 7 --label lower_monitor_main --padding rel:0:0:185:0
+yabai -m display 2 --label lower
+
+yabai -m space 1 --label terminal
+yabai -m space 2 --label slack
+yabai -m space 3 --label obsidian
+yabai -m space 4 --label tg-browser
+yabai -m space 5 --label spotify
+yabai -m space 6 --label rabbi-email
+yabai -m space 7 --label lower_monitor
+yabai -m space 9 --label mb-msgs
+
+eval "$lower_monitor_left_padding"
 
 # left padding to bottom screen to show times, reminders, and crypto tickers on desktop
-# yabai -m signal --add event=window_created action="yabai -m space lower_monitor_main --padding rel:0:0:185:0"
-# yabai -m signal --add event=window_destroyed action="yabai -m space lower_monitor_main --padding rel:0:0:185:0"
-# yabai -m signal --add event=window_moved action="yabai -m space lower_monitor_main --padding rel:0:0:185:0"
-# yabai -m signal --add event=space_changed action="yabai -m space lower_monitor_main --padding rel:0:0:185:0"
-# yabai -m signal --add event=display_added action="yabai -m space lower_monitor_main --padding rel:0:0:185:0"
-# yabai -m signal --add event=display_removed action="yabai -m space lower_monitor_main --padding rel:0:0:185:0"
-# yabai -m signal --add event=system_woke action="yabai -m space lower_monitor_main --padding rel:0:0:185:0"
+# yabai -m signal --add event=application_launched action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=application_terminated action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=application_front_switched action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=application_activated action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=application_deactivated action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=application_visible action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=application_hidden action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=window_created action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=window_destroyed action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=window_focused action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=window_moved action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=window_resized action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=window_minimized action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=window_deminimized action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=window_title_changed action="${lower_monitor_left_padding[@]}"
+yabai -m signal --add event=space_created action="${lower_monitor_left_padding[@]}"
+yabai -m signal --add event=space_destroyed action="${lower_monitor_left_padding[@]}"
+yabai -m signal --add event=space_changed action="${lower_monitor_left_padding[@]}"
+yabai -m signal --add event=display_added action="${lower_monitor_left_padding[@]}"
+yabai -m signal --add event=display_removed action="${lower_monitor_left_padding[@]}"
+yabai -m signal --add event=display_moved action="${lower_monitor_left_padding[@]}"
+yabai -m signal --add event=display_resized action="${lower_monitor_left_padding[@]}"
+yabai -m signal --add event=display_changed action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=mission_control_enter action="${lower_monitor_left_padding[@]}"
+# yabai -m signal --add event=mission_control_exit action="${lower_monitor_left_padding[@]}"
+yabai -m signal --add event=system_woke action="${lower_monitor_left_padding[@]}"
 
 # disable yabai for these apps
 # yabai -m rule --add app="^Discord$" manage=off
