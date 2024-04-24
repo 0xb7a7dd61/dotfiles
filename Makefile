@@ -50,4 +50,7 @@ setup:
 	@echo Copying zsh dotfiles...
 	cp $(PWD)/zsh/.zshrc ~/
 
+	@echo Grabbing installed lazy-lock.json...
+	cp ~/.config/nvim/lazy-lock.json $(PWD)/nvim/lazy-lock.json
+
 .PHONY:	setup
