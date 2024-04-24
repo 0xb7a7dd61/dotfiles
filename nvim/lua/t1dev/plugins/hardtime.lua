@@ -2,6 +2,8 @@ return {
     {
         "m4xshen/hardtime.nvim",
         dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+        command = "Hardtime",
+        event = "BufEnter",
         opts = {
             max_count = 8,
             disabled_keys = {
