@@ -24,6 +24,7 @@ require("lazy").setup({
         { import = "lazyvim.plugins.extras.lang.rust" },
         { import = "lazyvim.plugins.extras.lang.json" },
         { "nvim-neo-tree/neo-tree.nvim", enabled = false },
+        { import = "lazyvim.plugins.extras.linting.eslint" },
         -- import/override with your plugins
         { import = "t1dev.plugins" },
     },

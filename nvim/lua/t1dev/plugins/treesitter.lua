@@ -1,27 +1,33 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-    },
-    opts = {
-        ensure_installed = {
-            "bash",
-            "html",
-            "javascript",
-            "json",
-            "lua",
-            "markdown",
-            "markdown_inline",
-            "python",
-            "query",
-            "regex",
-            "solidity", -- important for filetypes detection
-            "tsx",
-            "typescript",
-            "vim",
-            "yaml",
+    {
+        "nvim-treesitter/nvim-treesitter",
+        dependencies = {
+            "JoosepAlviste/nvim-ts-context-commentstring",
         },
-        context_commentstring = {
+        opts = {
+            ensure_installed = {
+                "bash",
+                "html",
+                "javascript",
+                "json",
+                "lua",
+                "markdown",
+                "markdown_inline",
+                "python",
+                "query",
+                "regex",
+                "solidity", -- important for filetypes detection
+                "tsx",
+                "typescript",
+                "vim",
+                "yaml",
+            },
+            indent = { enable = true },
+        },
+    },
+    {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        opts = {
             enable = true,
             enable_autocmd = false,
             config = {
@@ -29,6 +35,5 @@ return {
                 solidity = { __default = "// %s", __multiline = "/* %s */" },
             },
         },
-        indent = { enable = true },
     },
 }
