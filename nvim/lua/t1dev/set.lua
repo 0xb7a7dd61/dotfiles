@@ -5,9 +5,9 @@ set.number = true
 set.regexpengine = 2
 set.relativenumber = true
 set.showmatch = true
-set.softtabstop = 4
-set.shiftwidth = 4
-set.tabstop = 4
+set.softtabstop = 2
+set.shiftwidth = 2
+set.tabstop = 2
 set.wildmode = "list:longest"
 
 set.hlsearch = false
