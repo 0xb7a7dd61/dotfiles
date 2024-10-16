@@ -1,7 +1,7 @@
 # ~/.config/yabai/yabairc 
 
-lower_monitor_left_padding='if [[ $(yabai -m query --displays --display $(yabai -m query --spaces --space 7 | jq ".display") | jq ".uuid") == "\"83EC60B3-B5B3-47F5-89E1-38A4B46AE204\"" ]]; then yabai -m space 7 --padding abs:0:0:195:0; fi'
-laptop_left_padding='if [[ $(yabai -m query --displays --display $(yabai -m query --spaces --space 8 | jq ".display") | jq ".uuid") == "\"37D8832A-2D66-02CA-B9F7-8F30A301B230\"" ]]; then yabai -m space 8 --padding abs:0:0:355:0; fi'
+lower_monitor_left_padding='if [[ $(yabai -m query --displays --display $(yabai -m query --spaces --space 8 | jq ".display") | jq ".uuid") == "\"83EC60B3-B5B3-47F5-89E1-38A4B46AE204\"" ]]; then yabai -m space 8 --padding abs:0:0:195:0; fi'
+laptop_left_padding='if [[ $(yabai -m query --displays --display $(yabai -m query --spaces --space 7 | jq ".display") | jq ".uuid") == "\"37D8832A-2D66-02CA-B9F7-8F30A301B230\"" ]]; then yabai -m space 7 --padding abs:0:0:355:0; fi'
 set_padding="${laptop_left_padding[@]} && ${lower_monitor_left_padding[@]}"
 # event hook for enabling the dock injection for spaces management
 # must be before --load-sa
