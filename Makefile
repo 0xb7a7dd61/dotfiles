@@ -53,4 +53,9 @@ setup:
 	@echo Grabbing installed lazy-lock.json...
 	cp ~/.config/nvim/lazy-lock.json $(PWD)/nvim/lazy-lock.json
 
+	@echo Installing Aptos Move Language Server...
+	cp $(PWD)/bin/aptos-move-analyzer ~/.local/bin/
+	mkdir -p ~/.local/share/nvim/site/parser/
+	cp $(PWD)/bin/move.so ~/.local/share/nvim/site/parser/ 
+
 .PHONY:	setup
