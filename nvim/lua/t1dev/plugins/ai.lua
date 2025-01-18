@@ -37,7 +37,7 @@ return {
       },
     },
     opts = {
-      provider = "openai", -- Default provider
+      provider = "claude", -- Default provider
       claude = {
         -- Defaults:
         -- endpoint = "https://api.anthropic.com",
