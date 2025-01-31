@@ -1,33 +1,4 @@
 return {
-  -- copilot set up for ghost text only
-  {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    opts = {
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        debounce = 75,
-        keymap = {
-          accept = false, -- set in cmp mapping for <Tab>
-          accept_line = "<M-Down>",
-          accept_word = "<M-Right>",
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<M-Space>",
-        },
-      },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        help = true,
-      },
-      copilot_node_command = "node",
-      server_opts_overrides = {},
-    },
-  },
   -- Disable tab and s-tab in lua snip to use for copilot
   {
     "L3MON4D3/LuaSnip",
