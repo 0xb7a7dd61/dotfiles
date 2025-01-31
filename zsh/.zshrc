@@ -58,6 +58,5 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
 
-# AI for nvim
-# export OPENAI_API_KEY=
-# export ANTHROPIC_API_KEY=
+bindkey "\e[1;3D" backward-word     # ⌥←
+bindkey "\e[1;3C" forward-word      # ⌥→
