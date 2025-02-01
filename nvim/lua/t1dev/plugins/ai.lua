@@ -1,13 +1,16 @@
 return {
   {
     "olimorris/codecompanion.nvim",
-    -- dependencies = {
-    --   "nvim-lua/plenary.nvim",
-    --   "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      { "echasnovski/mini.diff", opts = {} },
+    },
     keys = {
       { "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "Toggle chat" },
       { "ga", "<cmd>CodeCompanionChat Add<cr>", mode = { "n", "v" }, desc = "Add selected text to chat buffer" },
       { "<leader>ap", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "Open action palette" },
+      { "<leader>ai", "<cmd>'<,'>CodeCompanion<cr>", mode = { "n", "v" }, desc = "Run inline ai suggestions" },
     },
     config = function()
       require("codecompanion").setup({
@@ -23,7 +26,7 @@ return {
             return require("codecompanion.adapters").extend("copilot", {
               schema = {
                 model = {
-                  default = "o1-mini-2024-09-12",
+                  default = "o3-mini-2025-01-31",
                 },
                 max_tokens = {
                   default = 8192,
@@ -36,13 +39,13 @@ return {
               env = {
                 api_key = "cmd:op read op://personal/OpenAI/credential --no-newline",
               },
-              schema = {
-                model = {
-                  default = function()
-                    return "o1-preview"
-                  end,
-                },
-              },
+              -- schema = {
+              --   model = {
+              --     default = function()
+              --       return "o1-preview"
+              --     end,
+              --   },
+              -- },
             })
           end,
         },
@@ -146,9 +149,87 @@ return {
               },
             },
           },
+          ["Solidity Development"] = {
+            strategy = "workflow",
+            description = "Smart contract development and security workflow",
+            opts = { index = 1 },
+            prompts = {
+              {
+                {
+                  role = "user",
+                  content = "Review this smart contract for common security vulnerabilities and suggest improvements",
+                  opts = { auto_submit = true },
+                },
+              },
+              {
+                {
+                  role = "user",
+                  content = "Generate unit tests for this smart contract using Hardhat and Chai",
+                  opts = { auto_submit = true },
+                },
+              },
+              {
+                {
+                  role = "user",
+                  content = "Create a gas-optimized version of this smart contract",
+                  opts = { auto_submit = true },
+                },
+              },
+              {
+                {
+                  role = "user",
+                  content = "Generate events and error handling for this smart contract following best practices",
+                  opts = { auto_submit = true },
+                },
+              },
+            },
+          },
+          ["AWS CDK Patterns"] = {
+            strategy = "workflow",
+            description = "AWS Infrastructure as Code patterns using CDK",
+            opts = { index = 1 },
+            prompts = {
+              {
+                {
+                  role = "user",
+                  content = "Create a CDK stack for a serverless API with Lambda, API Gateway, and DynamoDB",
+                  opts = { auto_submit = true },
+                },
+              },
+              {
+                {
+                  role = "user",
+                  content = "Add VPC configuration and security groups to this CDK stack",
+                  opts = { auto_submit = true },
+                },
+              },
+              {
+                {
+                  role = "user",
+                  content = "Implement CloudWatch alarms and metrics for this infrastructure",
+                  opts = { auto_submit = true },
+                },
+              },
+              {
+                {
+                  role = "user",
+                  content = "Generate IAM roles and policies following least privilege principle",
+                  opts = { auto_submit = true },
+                },
+              },
+              {
+                {
+                  role = "user",
+                  content = "Add tags and cost allocation strategies to these resources",
+                  opts = { auto_submit = true },
+                },
+              },
+            },
+          },
         },
         strategies = {
           chat = {
+            adapter = "anthropic",
             keymaps = {
               send = {
                 modes = {
@@ -165,23 +246,23 @@ return {
             slash_commands = {
               ["buffer"] = {
                 opts = {
-                  provider = "telescope",
+                  provider = "fzf_lua",
                 },
               },
               ["help"] = {
                 opts = {
-                  provider = "telescope",
+                  provider = "fzf_lua",
                   max_lines = 1000,
                 },
               },
               ["file"] = {
                 opts = {
-                  provider = "telescope",
+                  provider = "fzf_lua",
                 },
               },
               ["symbols"] = {
                 opts = {
-                  provider = "telescope",
+                  provider = "fzf_lua",
                 },
               },
             },
@@ -204,6 +285,16 @@ return {
         opts = {
           log_level = "DEBUG",
         },
+      })
+    end,
+  },
+  {
+    "echasnovski/mini.diff", -- Inline and better diff over the default
+    config = function()
+      local diff = require("mini.diff")
+      diff.setup({
+        -- Disabled by default
+        source = diff.gen_source.none(),
       })
     end,
   },
@@ -247,6 +338,103 @@ return {
       server_opts_overrides = {},
     },
   },
+  -- add ai_accept action
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   opts = function()
+  --     LazyVim.cmp.actions.ai_accept = function()
+  --       if require("copilot.suggestion").is_visible() then
+  --         LazyVim.create_undo()
+  --         require("copilot.suggestion").accept()
+  --         return true
+  --       end
+  --     end
+  --   end,
+  -- },
+  -- -- lualine
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   optional = true,
+  --   event = "VeryLazy",
+  --   opts = function(_, opts)
+  --     table.insert(
+  --       opts.sections.lualine_x,
+  --       2,
+  --       LazyVim.lualine.status(LazyVim.config.icons.kinds.Copilot, function()
+  --         local clients = package.loaded["copilot"] and LazyVim.lsp.get_clients({ name = "copilot", bufnr = 0 }) or {}
+  --         if #clients > 0 then
+  --           local status = require("copilot.api").status.data.status
+  --           return (status == "InProgress" and "pending") or (status == "Warning" and "error") or "ok"
+  --         end
+  --       end)
+  --     )
+  --   end,
+  -- },
+  --
+  -- vim.g.ai_cmp
+  --     and {
+  --       -- copilot cmp source
+  --       {
+  --         "hrsh7th/nvim-cmp",
+  --         optional = true,
+  --         dependencies = { -- this will only be evaluated if nvim-cmp is enabled
+  --           {
+  --             "zbirenbaum/copilot-cmp",
+  --             opts = {},
+  --             config = function(_, opts)
+  --               local copilot_cmp = require("copilot_cmp")
+  --               copilot_cmp.setup(opts)
+  --               -- attach cmp source whenever copilot attaches
+  --               -- fixes lazy-loading issues with the copilot cmp source
+  --               LazyVim.lsp.on_attach(function()
+  --                 copilot_cmp._on_insert_enter({})
+  --               end, "copilot")
+  --             end,
+  --             specs = {
+  --               {
+  --                 "hrsh7th/nvim-cmp",
+  --                 optional = true,
+  --                 opts = function(_, opts)
+  --                   table.insert(opts.sources, 1, {
+  --                     name = "copilot",
+  --                     group_index = 1,
+  --                     priority = 100,
+  --                   })
+  --                 end,
+  --               },
+  --             },
+  --           },
+  --         },
+  --       },
+  --       {
+  --         "saghen/blink.cmp",
+  --         optional = true,
+  --         dependencies = {
+  --           "giuxtaposition/blink-cmp-copilot",
+  --           "saghen/blink.compat",
+  --         },
+  --         opts = {
+  --           sources = {
+  --             default = { "copilot" },
+  --             providers = {
+  --               copilot = {
+  --                 name = "copilot",
+  --                 module = "blink-cmp-copilot",
+  --                 kind = "Copilot",
+  --                 score_offset = 100,
+  --                 async = true,
+  --               },
+  --             },
+  --             compat = {
+  --               "avante_commands",
+  --               "avante_mentions",
+  --               "avante_files",
+  --             },
+  --           },
+  --         },
+  --       },
+  --     }
+  --   or nil,
 }
 -- return {
 --   {
