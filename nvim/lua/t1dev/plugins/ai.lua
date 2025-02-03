@@ -299,26 +299,9 @@ return {
     end,
   },
   {
-    "MeanderingProgrammer/render-markdown.nvim", -- Make Markdown buffers look beautiful
-    ft = function(_, ft)
-      vim.list_extend(ft, { "markdown", "codecompanion" })
-    end,
-    opts = {
-      render_modes = true, -- Render in ALL modes
-      sign = {
-        enabled = false, -- Turn off in the status column
-      },
-    },
-  },
-  {
     "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    cmd = "Copilot",
-    build = ":Copilot auth",
     opts = {
       suggestion = {
-        enabled = true,
-        auto_trigger = true,
         debounce = 75,
         keymap = {
           accept = "<M-Down>",
@@ -329,15 +312,68 @@ return {
           dismiss = "<M-Space>",
         },
       },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        help = true,
-      },
       copilot_node_command = "node",
       server_opts_overrides = {},
     },
   },
+  -- Add statusline at the bottom for a spinner when code companion is processing a chat question
+  {
+    "nvim-lualine/lualine.nvim",
+    optional = true,
+    event = "VeryLazy",
+    opts = function(_, opts)
+      local M = require("lualine.component"):extend()
+
+      M.processing = false
+      M.spinner_index = 1
+
+      local spinner_symbols = {
+        "⠋",
+        "⠙",
+        "⠹",
+        "⠸",
+        "⠼",
+        "⠴",
+        "⠦",
+        "⠧",
+        "⠇",
+        "⠏",
+      }
+      local spinner_symbols_len = 10
+
+      -- Initializer
+      function M:init(options)
+        M.super.init(self, options)
+
+        local group = vim.api.nvim_create_augroup("CodeCompanionHooks", {})
+
+        vim.api.nvim_create_autocmd({ "User" }, {
+          pattern = "CodeCompanionRequest*",
+          group = group,
+          callback = function(request)
+            if request.match == "CodeCompanionRequestStarted" then
+              self.processing = true
+            elseif request.match == "CodeCompanionRequestFinished" then
+              self.processing = false
+            end
+          end,
+        })
+      end
+
+      -- Function that runs every time statusline is updated
+      function M:update_status()
+        if self.processing then
+          self.spinner_index = (self.spinner_index % spinner_symbols_len) + 1
+          return spinner_symbols[self.spinner_index]
+        else
+          return nil
+        end
+      end
+
+      table.insert(opts.sections.lualine_x, 2, M)
+    end,
+  },
+
   -- add ai_accept action
   -- {
   --   "zbirenbaum/copilot.lua",
