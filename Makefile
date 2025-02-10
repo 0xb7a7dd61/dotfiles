@@ -25,10 +25,6 @@ yabai_uninstall:
 	# unload the scripting addition by forcing a restart of Dock.app
 	killall Dock
 
-zsh_setup:
-	@echo Copying zsh dotfiles...
-	cp $(PWD)/zsh/.zshrc ~/
-
 setup:
 	@echo Copying nvim dotfiles...
 	mkdir -p ~/.config/nvim
@@ -59,4 +55,7 @@ setup:
 	mkdir -p ~/.local/share/nvim/site/parser/
 	cp $(PWD)/bin/move.so ~/.local/share/nvim/site/parser/ 
 
-.PHONY:	setup zsh_setup
+	@echo Copying zsh dotfiles...
+	cp $(PWD)/zsh/.zshrc ~/
+
+.PHONY:	setup

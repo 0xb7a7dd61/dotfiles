@@ -60,3 +60,5 @@ complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 bindkey "\e[1;3D" backward-word     # ⌥←
 bindkey "\e[1;3C" forward-word      # ⌥→
+
+alias glogaa="git log --all --graph --pretty=format:'%C(auto)%h%d %s %C(bold green)<%an> %C(white)(%ar)%Creset'"
