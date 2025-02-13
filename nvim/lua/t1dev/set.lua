@@ -30,3 +30,8 @@ vim.cmd("filetype plugin indent on")
 
 vim.g.markdown_recommended_style = 0
 vim.g.lazyvim_python_ruff = "ruff"
+
+vim.g.codecompanion_auto_tool_mode = true
+
+-- To turn off auto tool mode
+-- vim.g.codecompanion_auto_tool_mode = nil
