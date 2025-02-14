@@ -37,7 +37,7 @@ return {
           openai = function()
             return require("codecompanion.adapters").extend("openai", {
               env = {
-                api_key = "cmd:op read op://personal/OpenAI/credential --no-newline",
+                api_key = "cmd:op read op://Employee/OpenAI/credential --no-newline",
               },
               -- schema = {
               --   model = {
@@ -46,6 +46,20 @@ return {
               --     end,
               --   },
               -- },
+            })
+          end,
+          gemini = function()
+            return require("codecompanion.adapters").extend("gemini", {
+              env = {
+                api_key = "cmd:op read op://Employee/Gemini/credential --no-newline",
+              },
+              schema = {
+                model = {
+                  default = function()
+                    return "gemini-2.0-flash"
+                  end,
+                },
+              },
             })
           end,
         },
