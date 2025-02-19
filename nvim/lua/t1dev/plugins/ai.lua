@@ -64,178 +64,48 @@ return {
           end,
         },
         prompt_library = {
-          ["Test workflow"] = {
+          ["Zod object creation workflow"] = {
             strategy = "workflow",
-            description = "Use a workflow to test the plugin",
-            opts = {
-              index = 4,
-            },
-            prompts = {
-              {
-                {
-                  role = "user",
-                  content = "Generate a Python class for managing a book library with methods for adding, removing, and searching books",
-                  opts = {
-                    auto_submit = false,
-                  },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Write unit tests for the library class you just created",
-                  opts = {
-                    auto_submit = true,
-                  },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Create a TypeScript interface for a complex e-commerce shopping cart system",
-                  opts = {
-                    auto_submit = true,
-                  },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Write a recursive algorithm to balance a binary search tree in Java",
-                  opts = {
-                    auto_submit = true,
-                  },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Generate a comprehensive regex pattern to validate email addresses with explanations",
-                  opts = {
-                    auto_submit = true,
-                  },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Create a Rust struct and implementation for a thread-safe message queue",
-                  opts = {
-                    auto_submit = true,
-                  },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Write a GitHub Actions workflow file for CI/CD with multiple stages",
-                  opts = {
-                    auto_submit = true,
-                  },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Create SQL queries for a complex database schema with joins across 4 tables",
-                  opts = {
-                    auto_submit = true,
-                  },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Write a Lua configuration for Neovim with custom keybindings and plugins",
-                  opts = {
-                    auto_submit = true,
-                  },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Generate documentation in JSDoc format for a complex JavaScript API client",
-                  opts = {
-                    auto_submit = true,
-                  },
-                },
-              },
-            },
-          },
-          ["Solidity Development"] = {
-            strategy = "workflow",
-            description = "Smart contract development and security workflow",
+            description = "Instruct the LLM to create Zod objects to represent DTOs or ORMs",
             opts = { index = 1 },
             prompts = {
               {
                 {
-                  role = "user",
-                  content = "Review this smart contract for common security vulnerabilities and suggest improvements",
-                  opts = { auto_submit = true },
+                  role = "system",
+                  content = "You carefully provide accurate, factual, thoughtful, nuanced answers, and are brilliant at reasoning. If you think there might not be a correct answer, you say so. Always spend a few sentences explaining background context, assumptions, and step-by-step thinking BEFORE you try to answer a question. Don't be verbose in your answers, but do provide details and examples where it might help the explanation. You are an expert software engineer for the TypeScript language, specializing in Zod schema object creation.",
+                  opts = { visible = false },
                 },
               },
               {
                 {
                   role = "user",
-                  content = "Generate unit tests for this smart contract using Hardhat and Chai",
-                  opts = { auto_submit = true },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Create a gas-optimized version of this smart contract",
-                  opts = { auto_submit = true },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Generate events and error handling for this smart contract following best practices",
-                  opts = { auto_submit = true },
-                },
-              },
-            },
-          },
-          ["AWS CDK Patterns"] = {
-            strategy = "workflow",
-            description = "AWS Infrastructure as Code patterns using CDK",
-            opts = { index = 1 },
-            prompts = {
-              {
-                {
-                  role = "user",
-                  content = "Create a CDK stack for a serverless API with Lambda, API Gateway, and DynamoDB",
-                  opts = { auto_submit = true },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Add VPC configuration and security groups to this CDK stack",
-                  opts = { auto_submit = true },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Implement CloudWatch alarms and metrics for this infrastructure",
-                  opts = { auto_submit = true },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Generate IAM roles and policies following least privilege principle",
-                  opts = { auto_submit = true },
-                },
-              },
-              {
-                {
-                  role = "user",
-                  content = "Add tags and cost allocation strategies to these resources",
-                  opts = { auto_submit = true },
+                  content = function()
+                    -- Leverage auto_tool_mode which disables the requirement of approvals and automatically saves any edited buffer
+                    vim.g.codecompanion_auto_tool_mode = true
+
+                    -- Some clear instructions for the LLM to follow
+                    return [[### Instructions
+
+1. Create a new schema file next to #buffer{watch} using the @full_stack_dev
+2. Then write the code that includes the Zod schema objects noted in the following schema outline.
+3. Finally, analyze the original buffer for any opportunities to implement the newly created Zod schema objects.
+4. If there are any places that could benefit from the Zod objects, implement them. If there is any doubt, ask about the places that may benefit from the new Zod objects.
+
+### Schema Outline 
+
+Your objects here 
+
+### Steps to Follow
+
+You are required to write code following the instructions provided above, providing any questions you may have regarding object structure or object strictness, etc. Follow these steps exactly:
+
+1. Do everything asked from you in the Instructions section above.
+2. Then using @full_stack_dev, run `npx tsc --noEmit` to ensure there are no compilation errors from your code changes.
+3. Make sure you trigger all necessary tools in the same response
+
+We'll repeat this cycle until the project compiles without errors. Ensure no deviations from these steps.]]
+                  end,
+                  opts = { auto_submit = false },
                 },
               },
             },
@@ -243,7 +113,7 @@ return {
         },
         strategies = {
           chat = {
-            adapter = "anthropic",
+            adapter = "gemini",
             keymaps = {
               send = {
                 modes = {
