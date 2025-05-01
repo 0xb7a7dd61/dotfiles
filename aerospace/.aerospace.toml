@@ -1,0 +1,185 @@
+# Reference: https://github.com/i3/i3/blob/next/etc/config
+
+# i3 doesn't have "normalizations" feature that why we disable them here.
+# But the feature is very helpful.
+# Normalizations eliminate all sorts of weird tree configurations that don't make sense.
+# Give normalizations a chance and enable them back.
+# enable-normalization-flatten-containers = false
+# enable-normalization-opposite-orientation-for-nested-containers = false
+start-at-login = true
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
+
+# Mouse follows focus when focused monitor changes
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Possible values: tiles|accordion
+default-root-container-layout = 'tiles'
+
+# Possible values: horizontal|vertical|auto
+# 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
+#               tall monitor (anything higher than wide) gets vertical orientation
+default-root-container-orientation = 'auto'
+
+# Gaps between windows (inner-*) and between monitor edges (outer-*).
+# Possible values:
+# - Constant:     gaps.outer.top = 8
+# - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
+#                 In this example, 24 is a default value when there is no match.
+#                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
+#                 See:
+#                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[gaps]
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = [{ monitor."Built-in" = 355 }, { monitor."LG HDR WQHD" = 195 }, 10]
+outer.bottom = 10
+outer.top = 10
+outer.right = 10
+
+# [key-mapping]
+# preset = 'colemak'
+
+[mode.main.binding]
+alt-enter = 'exec-and-forget open -n -a wezterm'
+
+# i3 wraps focus by default
+# alt-j =         'focus --boundaries-action wrap-around-the-workspace left'
+# alt-k =         'focus --boundaries-action wrap-around-the-workspace down'
+# alt-l =         'focus --boundaries-action wrap-around-the-workspace up'
+# alt-semicolon = 'focus --boundaries-action wrap-around-the-workspace right'
+alt-n = 'focus --boundaries-action wrap-around-the-workspace left'
+alt-e = 'focus --boundaries-action wrap-around-the-workspace down'
+alt-u = 'focus --boundaries-action wrap-around-the-workspace up'
+alt-i = 'focus --boundaries-action wrap-around-the-workspace right'
+
+# alt-shift-j = 'move left'
+# alt-shift-k = 'move down'
+# alt-shift-l = 'move up'
+# alt-shift-semicolon = 'move right'
+alt-shift-n = 'move left'
+alt-shift-e = 'move down'
+alt-shift-u = 'move up'
+alt-shift-i = 'move right'
+
+# Consider using 'join-with' command as a 'split' replacement if you want to enable
+# normalizations
+alt-h = 'split horizontal'
+alt-v = 'split vertical'
+
+alt-shift-z = 'fullscreen'
+
+alt-s = 'layout v_accordion'               # 'layout stacking' in i3
+alt-w = 'layout h_accordion'               # 'layout tabbed' in i3
+alt-f = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+
+alt-shift-t = 'layout floating tiling' # 'floating toggle' in i3
+
+# Not supported, because this command is redundant in AeroSpace mental model.
+# See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
+#alt-space = 'focus toggle_tiling_floating'
+
+# `focus parent`/`focus child` are not yet supported, and it's not clear whether they
+# should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
+# alt-a = 'focus parent'
+
+alt-1 = 'workspace terminal'
+alt-2 = 'workspace slack'
+alt-3 = 'workspace misc'
+alt-4 = 'workspace tg_brave'
+alt-5 = 'workspace music'
+alt-6 = 'workspace rabby_mail'
+alt-7 = 'workspace mac_messages'
+alt-8 = 'workspace top_screen'
+
+alt-shift-1 = 'move-node-to-workspace terminal'
+alt-shift-2 = 'move-node-to-workspace slack'
+alt-shift-3 = 'move-node-to-workspace misc'
+alt-shift-4 = 'move-node-to-workspace tg_brave'
+alt-shift-5 = 'move-node-to-workspace music'
+alt-shift-6 = 'move-node-to-workspace rabby_mail'
+alt-shift-7 = 'move-node-to-workspace mac_messages'
+alt-shift-8 = 'move-node-to-workspace top_screen'
+
+alt-shift-c = 'reload-config'
+alt-r = 'mode resize'
+
+[workspace-to-monitor-force-assignment]
+terminal = 'main'
+slack = 'main'
+misc = 'main'
+tg_brave = 'main'
+music = 'main'
+rabby_mail = 'main'
+mac_messages = 'Built-in'
+top_screen = 'LG HDR WQHD'
+
+[mode.resize.binding]
+n = 'resize width -50'
+u = 'resize height +50'
+e = 'resize height -50'
+i = 'resize width +50'
+enter = 'mode main'
+esc = 'mode main'
+
+# Automatically move apps to specific workspaces
+
+# WezTerm
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace terminal']
+
+# Slack
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace slack']
+
+# Discord
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace misc']
+
+# Telegram
+[[on-window-detected]]
+if.app-id = 'ru.keepcoder.Telegram'
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace tg_brave']
+
+# Brave
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace tg_brave']
+
+# Spotify
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace music']
+
+# Mail
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace rabby_mail']
+
+# Rabby
+[[on-window-detected]]
+if.app-id = 'com.debank.RabbyDesktop'
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace rabby_mail']
+
+# iMessage
+[[on-window-detected]]
+if.app-id = 'com.apple.MobileSMS'
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace mac_messages']
+
+# Vivaldi
+[[on-window-detected]]
+if.app-id = 'com.vivaldi.Vivaldi'
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace top_screen']
