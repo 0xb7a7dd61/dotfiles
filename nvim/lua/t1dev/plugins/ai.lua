@@ -4,7 +4,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
-      { "echasnovski/mini.diff", opts = {} },
+      { "nvim-mini/mini.diff", opts = {} },
     },
     keys = {
       { "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "Toggle chat" },
@@ -173,7 +173,7 @@ We'll repeat this cycle until the project compiles without errors. Ensure no dev
     end,
   },
   {
-    "echasnovski/mini.diff", -- Inline and better diff over the default
+    "nvim-mini/mini.diff", -- Inline and better diff over the default
     config = function()
       local diff = require("mini.diff")
       diff.setup({

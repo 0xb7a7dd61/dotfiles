@@ -6,7 +6,7 @@ return {
       -- For solidity files, use nomicfoundation's language server with
       --  forge formatting defined in the project's detected git repo
       solidity = {
-        root_dir = require("lspconfig.util").find_git_ancestor,
+        root_dir = vim.fs.dirname(vim.fs.find(".git", { upward = true })[1]),
         cmd = { "nomicfoundation-solidity-language-server", "--stdio" },
         filetypes = { "solidity" },
         single_file_support = true,
@@ -26,7 +26,7 @@ return {
     })
     opts.setup = vim.tbl_extend("force", opts.setup, {
       eslint = function()
-        require("lazyvim.util").lsp.on_attach(function(client)
+        Snacks.util.lsp.on({ name = "eslint" }, function(buffer, client)
           if client.name == "eslint" then
             client.server_capabilities.documentFormattingProvider = true
           elseif client.name == "tsserver" then
