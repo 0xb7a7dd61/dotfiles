@@ -15,59 +15,47 @@ return {
     config = function()
       require("codecompanion").setup({
         adapters = {
-          anthropic = function()
-            return require("codecompanion.adapters").extend("anthropic", {
-              env = {
-                api_key = "cmd:op read op://Employee/Anthropic/credential --no-newline",
-              },
-            })
-          end,
-          copilot = function()
-            return require("codecompanion.adapters").extend("copilot", {
-              schema = {
-                model = {
-                  default = "o3-mini-2025-01-31",
+          acp = {
+            gemini_cli = function()
+              return require("codecompanion.adapters").extend("gemini_cli", {
+                env = {
+                  GEMINI_API_KEY = "cmd:op read op://Employee/Gemini/credential --no-newline",
                 },
-                max_tokens = {
-                  default = 8192,
+              })
+            end,
+          },
+          http = {
+            anthropic = function()
+              return require("codecompanion.adapters").extend("anthropic", {
+                env = {
+                  api_key = "cmd:op read op://Employee/Anthropic/credential --no-newline",
                 },
-              },
-            })
-          end,
-          openai = function()
-            return require("codecompanion.adapters").extend("openai", {
-              env = {
-                api_key = "cmd:op read op://Employee/OpenAI/credential --no-newline",
-              },
-              -- schema = {
-              --   model = {
-              --     default = function()
-              --       return "o1-preview"
-              --     end,
-              --   },
-              -- },
-            })
-          end,
-          gemini = function()
-            return require("codecompanion.adapters").extend("gemini", {
-              env = {
-                api_key = "cmd:op read op://Employee/Gemini/credential --no-newline",
-              },
-              schema = {
-                model = {
-                  default = function()
-                    return "gemini-2.0-flash"
-                  end,
+              })
+            end,
+            copilot = function()
+              return require("codecompanion.adapters").extend("copilot", {})
+            end,
+            openai = function()
+              return require("codecompanion.adapters").extend("openai", {
+                env = {
+                  api_key = "cmd:op read op://Employee/OpenAI/credential --no-newline",
                 },
-              },
-            })
-          end,
+              })
+            end,
+            gemini = function()
+              return require("codecompanion.adapters").extend("gemini", {
+                env = {
+                  api_key = "cmd:op read op://Employee/Gemini/credential --no-newline",
+                },
+              })
+            end,
+          },
         },
         prompt_library = {
           ["Zod object creation workflow"] = {
-            strategy = "workflow",
+            interactions = "chat",
             description = "Instruct the LLM to create Zod objects to represent DTOs or ORMs",
-            opts = { index = 1 },
+            opts = { index = 1, is_workflow = true },
             prompts = {
               {
                 {
@@ -86,7 +74,7 @@ return {
                     -- Some clear instructions for the LLM to follow
                     return [[### Instructions
 
-1. Create a new schema file next to #buffer{watch} using the @full_stack_dev
+1. Create a new schema file next to #buffer{diff} using the @full_stack_dev
 2. Then write the code that includes the Zod schema objects noted in the following schema outline.
 3. Finally, analyze the original buffer for any opportunities to implement the newly created Zod schema objects.
 4. If there are any places that could benefit from the Zod objects, implement them. If there is any doubt, ask about the places that may benefit from the new Zod objects.
@@ -111,7 +99,7 @@ We'll repeat this cycle until the project compiles without errors. Ensure no dev
             },
           },
         },
-        strategies = {
+        interactions = {
           chat = {
             adapter = "gemini",
             keymaps = {
