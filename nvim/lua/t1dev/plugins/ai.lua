@@ -19,7 +19,7 @@ return {
             gemini_cli = function()
               return require("codecompanion.adapters").extend("gemini_cli", {
                 env = {
-                  GEMINI_API_KEY = "cmd:op read op://Employee/Gemini/credential --no-newline",
+                  GEMINI_API_KEY = "cmd:op read op://Private/Gemini/credential --account my.1password.com --no-newline",
                 },
               })
             end,
@@ -28,7 +28,7 @@ return {
             anthropic = function()
               return require("codecompanion.adapters").extend("anthropic", {
                 env = {
-                  api_key = "cmd:op read op://Employee/Anthropic/credential --no-newline",
+                  api_key = "cmd:op read op://Private/Anthropic/credential --account my.1password.com --no-newline",
                 },
               })
             end,
@@ -38,14 +38,14 @@ return {
             openai = function()
               return require("codecompanion.adapters").extend("openai", {
                 env = {
-                  api_key = "cmd:op read op://Employee/OpenAI/credential --no-newline",
+                  api_key = "cmd:op read op://Private/OpenAI/credential --account my.1password.com --no-newline",
                 },
               })
             end,
             gemini = function()
               return require("codecompanion.adapters").extend("gemini", {
                 env = {
-                  api_key = "cmd:op read op://Employee/Gemini/credential --no-newline",
+                  api_key = "cmd:op read op://Private/Gemini/credential --account my.1password.com --no-newline",
                 },
               })
             end,
