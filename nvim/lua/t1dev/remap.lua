@@ -46,6 +46,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<S-Up>", "<C-u>")
 vim.keymap.set("n", "<S-Down>", "<C-d>")
 
+-- switch window, skipping notification popups
 vim.keymap.set("n", "<leader>ww", function()
   local start_win = vim.api.nvim_get_current_win()
   local tries = 0
@@ -67,3 +68,16 @@ vim.keymap.set("n", "<leader>ww", function()
     end
   until false
 end, { desc = "Next window (skip notifications)" })
+
+-- go to popup nification window
+vim.keymap.set("n", "<leader>wp", function()
+  local wins = vim.api.nvim_list_wins()
+  for _, win in ipairs(wins) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    if vim.bo[buf].filetype == "snacks_notif" then
+      vim.api.nvim_set_current_win(win)
+      return
+    end
+  end
+  vim.notify("No notification popup found", vim.log.levels.INFO)
+end, { desc = "Switch to notification popup" })
