@@ -35,24 +35,7 @@ yabai -m space 8 --label lower_monitor
 
 eval "$set_padding"
 
-# leaving all signal events commented out to remind me which ones are unneeded for now
-
-# left padding to bottom screen to show times, reminders, and crypto tickers on desktop
-# yabai -m signal --add event=application_launched action="${set_padding[@]}"
-# yabai -m signal --add event=application_terminated action="${set_padding[@]}"
-# yabai -m signal --add event=application_front_switched action="${set_padding[@]}"
-# yabai -m signal --add event=application_activated action="${set_padding[@]}"
-# yabai -m signal --add event=application_deactivated action="${set_padding[@]}"
-# yabai -m signal --add event=application_visible action="${set_padding[@]}"
-# yabai -m signal --add event=application_hidden action="${set_padding[@]}"
-# yabai -m signal --add event=window_created action="${set_padding[@]}"
-# yabai -m signal --add event=window_destroyed action="${set_padding[@]}"
-# yabai -m signal --add event=window_focused action="${set_padding[@]}"
-# yabai -m signal --add event=window_moved action="${set_padding[@]}"
-# yabai -m signal --add event=window_resized action="${set_padding[@]}"
-# yabai -m signal --add event=window_minimized action="${set_padding[@]}"
-# yabai -m signal --add event=window_deminimized action="${set_padding[@]}"
-# yabai -m signal --add event=window_title_changed action="${set_padding[@]}"
+# Signal events for padding adjustment on space/display changes
 yabai -m signal --add event=space_created action="${set_padding[@]}"
 yabai -m signal --add event=space_destroyed action="${set_padding[@]}"
 yabai -m signal --add event=space_changed action="${set_padding[@]}"
@@ -61,9 +44,4 @@ yabai -m signal --add event=display_removed action="${set_padding[@]}"
 yabai -m signal --add event=display_moved action="${set_padding[@]}"
 yabai -m signal --add event=display_resized action="${set_padding[@]}"
 yabai -m signal --add event=display_changed action="${set_padding[@]}"
-# yabai -m signal --add event=mission_control_enter action="${set_padding[@]}"
-# yabai -m signal --add event=mission_control_exit action="${set_padding[@]}"
 yabai -m signal --add event=system_woke action="${set_padding[@]}"
-
-# disable yabai for these apps
-# yabai -m rule --add app="^Discord$" manage=off

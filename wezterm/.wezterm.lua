@@ -15,8 +15,6 @@ end
 config.window_background_opacity = 0.6
 config.text_background_opacity = 0.7
 
--- config.color_scheme = "Batman"
-
 config.foreground_text_hsb = {
   hue = 1.0,
   saturation = 1.25,

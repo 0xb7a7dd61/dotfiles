@@ -1,11 +1,9 @@
 return {
   "stevearc/conform.nvim",
-  ops = function(_, opts)
-    vim.tbl_extend("force", opts.formatters_by_ft or {}, {
-      formatters_by_ft = {
-        typescript = {},
-        javascript = {},
-      },
+  opts = function(_, opts)
+    opts.formatters_by_ft = vim.tbl_extend("force", opts.formatters_by_ft or {}, {
+      typescript = {},
+      javascript = {},
     })
   end,
 }

@@ -45,3 +45,25 @@ vim.keymap.set(
 -- remap shift up/down to half screen scrolling
 vim.keymap.set("n", "<S-Up>", "<C-u>")
 vim.keymap.set("n", "<S-Down>", "<C-d>")
+
+vim.keymap.set("n", "<leader>ww", function()
+  local start_win = vim.api.nvim_get_current_win()
+  local tries = 0
+  local max_tries = 20
+
+  repeat
+    vim.cmd("wincmd w")
+    local win = vim.api.nvim_get_current_win()
+    local buf = vim.api.nvim_win_get_buf(win)
+    local ft = vim.bo[buf].filetype
+
+    tries = tries + 1
+    if ft ~= "snacks_notif" then
+      return
+    end
+
+    if win == start_win or tries >= max_tries then
+      return
+    end
+  until false
+end, { desc = "Next window (skip notifications)" })

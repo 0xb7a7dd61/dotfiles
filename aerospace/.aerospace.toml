@@ -37,43 +37,30 @@ outer.bottom = 10
 outer.top = 10
 outer.right = 10
 
-# [key-mapping]
-# preset = 'colemak'
-
 [mode.main.binding]
 alt-enter = 'exec-and-forget open -n -a wezterm'
 
-# i3 wraps focus by default
-# alt-j =         'focus --boundaries-action wrap-around-the-workspace left'
-# alt-k =         'focus --boundaries-action wrap-around-the-workspace down'
-# alt-l =         'focus --boundaries-action wrap-around-the-workspace up'
-# alt-semicolon = 'focus --boundaries-action wrap-around-the-workspace right'
+# Focus (Colemak DH layout: n=left, e=down, u=up, i=right)
 alt-n = 'focus --boundaries-action wrap-around-the-workspace left'
 alt-e = 'focus --boundaries-action wrap-around-the-workspace down'
 alt-u = 'focus --boundaries-action wrap-around-the-workspace up'
 alt-i = 'focus --boundaries-action wrap-around-the-workspace right'
 
-# alt-shift-j = 'move left'
-# alt-shift-k = 'move down'
-# alt-shift-l = 'move up'
-# alt-shift-semicolon = 'move right'
+# Move windows
 alt-shift-n = 'move left'
 alt-shift-e = 'move down'
 alt-shift-u = 'move up'
 alt-shift-i = 'move right'
 
-# Consider using 'join-with' command as a 'split' replacement if you want to enable
-# normalizations
+# Splits and layouts
+# Consider using 'join-with' command as a 'split' replacement if you want to enable normalizations
 alt-h = 'split horizontal'
 alt-v = 'split vertical'
-
 alt-shift-z = 'fullscreen'
-
 alt-s = 'layout v_accordion'               # 'layout stacking' in i3
 alt-w = 'layout h_accordion'               # 'layout tabbed' in i3
 alt-f = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
-
-alt-shift-t = 'layout floating tiling' # 'floating toggle' in i3
+alt-shift-t = 'layout floating tiling'     # 'floating toggle' in i3
 
 # Not supported, because this command is redundant in AeroSpace mental model.
 # See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
@@ -82,7 +69,7 @@ alt-shift-t = 'layout floating tiling' # 'floating toggle' in i3
 # `focus parent`/`focus child` are not yet supported, and it's not clear whether they
 # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
 # alt-a = 'focus parent'
-
+# Workspaces
 alt-1 = 'workspace terminal'
 alt-2 = 'workspace slack'
 alt-3 = 'workspace misc'
