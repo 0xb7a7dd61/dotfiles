@@ -16,10 +16,10 @@ return {
       require("codecompanion").setup({
         adapters = {
           acp = {
-            gemini_cli = function()
-              return require("codecompanion.adapters").extend("gemini_cli", {
+            claude_code = function()
+              return require("codecompanion.adapters").extend("claude_code", {
                 env = {
-                  GEMINI_API_KEY = "cmd:op read op://Private/Gemini/credential --account my.1password.com --no-newline",
+                  CLAUDE_CODE_OAUTH_TOKEN = "cmd:op read op://Private/ClaudeCode/credential --account my.1password.com --no-newline",
                 },
               })
             end,
@@ -101,7 +101,7 @@ We'll repeat this cycle until the project compiles without errors. Ensure no dev
         },
         interactions = {
           chat = {
-            adapter = "gemini",
+            adapter = "claude_code",
             keymaps = {
               send = {
                 modes = {
