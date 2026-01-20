@@ -13,7 +13,7 @@ end
 -- This is where you actually apply your config choices
 
 config.window_background_opacity = 0.6
-config.text_background_opacity = 0.7
+config.text_background_opacity = 0.8
 
 config.foreground_text_hsb = {
   hue = 1.0,
