@@ -1,16 +1,16 @@
 #!/bin/bash
-# discord-post - Ask Larry to post to Discord
-# Usage: discord-post <channel> <message>
-# Example: discord-post "#announcements" "Shipped the feature!"
+# bb-post - Ask Larry to post to Discord
+# Usage: bb-post <channel> <message>
+# Example: bb-post "#announcements" "Shipped the feature!"
 
 set -e
 
 if [ $# -lt 2 ]; then
-  echo "Usage: discord-post <channel> <message>"
+  echo "Usage: bb-post <channel> <message>"
   echo ""
   echo "Examples:"
-  echo "  discord-post \"#announcements\" \"Shipped the new feature!\""
-  echo "  discord-post \"#larrys-gym\" \"Another skill acquired\""
+  echo "  bb-post \"#announcements\" \"Shipped the new feature!\""
+  echo "  bb-post \"#larrys-gym\" \"Another skill acquired\""
   exit 1
 fi
 
