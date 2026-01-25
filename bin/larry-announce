@@ -1,0 +1,46 @@
+#!/bin/bash
+# larry-announce - Ask Larry to post an announcement to Discord
+# Usage: larry-announce "message" [--channel #channel-name]
+
+set -e
+
+message=""
+channel="#announcements"
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --channel|-c)
+      channel="$2"
+      shift 2
+      ;;
+    *)
+      message="$1"
+      shift
+      ;;
+  esac
+done
+
+if [ -z "$message" ]; then
+  echo "Usage: larry-announce \"message\" [--channel #channel-name]"
+  echo ""
+  echo "Examples:"
+  echo "  larry-announce \"Shipped the new feature!\""
+  echo "  larry-announce \"Build fixed\" --channel #larrys-gym"
+  exit 1
+fi
+
+# Get current project name if in a git repo
+project=""
+if git rev-parse --git-dir > /dev/null 2>&1; then
+  project=$(basename "$(git rev-parse --show-toplevel)")
+fi
+
+# Build the wake message
+wake_text="📢 DISCORD_ANNOUNCE: Post to $channel"
+if [ -n "$project" ]; then
+  wake_text="$wake_text (from $project)"
+fi
+wake_text="$wake_text: $message"
+
+clawdbot cron wake --text "$wake_text"
+echo "✅ Asked Larry to announce: $message"
