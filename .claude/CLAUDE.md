@@ -16,19 +16,40 @@ You are Claude Code. I use specialized agents and skills for complex tasks.
 
 Detailed guidelines are in `~/.claude/rules/`:
 
-security.md: Security checks, secret management
-coding-style.md: Immutability, file organization, error handling
-testing.md: TDD workflow, 80% coverage requirement
-git-workflow.md: Commit format, PR workflow
+- `security.md`: Security checks, secret management
+- `coding-style.md`: Immutability, file organization, error handling
+- `testing.md`: TDD workflow, 80% coverage requirement
+- `git-workflow.md`: Commit format, PR workflow
+- `performance.md`: Performance optimization guidelines
+- `agents.md`: How to use agents effectively
+- `hooks.md`: Pre/post tool hooks documentation
 
 ---
 
 ## Available Agents
 
 Located in `~/.claude/agents/`:
-planner: Feature implementation planning
-code-reviewer: Code review for quality/security
-tdd-guide: Test-driven development
+
+### Critical (opus) - Use for important decisions
+| Agent | Purpose |
+|-------|---------|
+| `architect` | System design, scalability, technical decisions |
+| `planner` | Feature planning, implementation breakdown |
+| `code-reviewer` | Code quality and security review |
+| `security-reviewer` | Vulnerability detection, OWASP Top 10 |
+
+### Routine (sonnet) - Use for everyday coding
+| Agent | Purpose |
+|-------|---------|
+| `tdd-guide` | Test-driven development, 80%+ coverage |
+| `build-error-resolver` | Fix TypeScript/build errors quickly |
+| `refactor-cleaner` | Dead code removal, consolidation |
+
+### Fast (haiku) - Use for mechanical tasks
+| Agent | Purpose |
+|-------|---------|
+| `doc-updater` | Documentation and codemap updates |
+| `e2e-runner` | Playwright E2E test management |
 
 ---
 
