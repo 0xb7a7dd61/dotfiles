@@ -89,21 +89,7 @@
           }
         ]
       }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"$HOME/.claude/hooks/gsd-check-update.js\""
-          }
-        ]
-      }
     ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "node \"$HOME/.claude/hooks/statusline.js\""
   },
   "enabledPlugins": {
     "mgrep@Mixedbread-Grep": true
