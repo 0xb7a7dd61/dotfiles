@@ -89,7 +89,7 @@
           },
           {
             "type": "command",
-            "command": "#!/bin/bash\n# Notify Larry that Claude Code session completed\ninput=$(cat)\nstop_reason=$(echo \"$input\" | jq -r '.stop_hook_reason // \"unknown\"')\nproject=$(basename \"$(pwd)\")\n\n# Wake Larry with context about what finished\nclawdbot cron wake --text \"🔧 Claude Code session finished in $project (reason: $stop_reason)\" 2>/dev/null || true\n\necho \"$input\""
+            "command": "#!/bin/bash\n# Notify Larry that Claude Code session completed\ninput=$(cat)\nstop_reason=$(echo \"$input\" | jq -r '.stop_hook_reason // \"unknown\"')\nproject=$(basename \"$(pwd)\")\n\n# Wake Larry with context about what finished\nclawdbot system event --text \"🔧 Claude Code session finished in $project (reason: $stop_reason)\" 2>/dev/null || true\n\necho \"$input\""
           }
         ]
       }

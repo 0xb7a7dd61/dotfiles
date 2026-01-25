@@ -42,5 +42,5 @@ if [ -n "$project" ]; then
 fi
 wake_text="$wake_text: $message"
 
-clawdbot cron wake --text "$wake_text"
+clawdbot system event --text "$wake_text" --mode now
 echo "✅ Asked Larry to announce: $message"
