@@ -1,0 +1,35 @@
+#!/bin/bash
+# discord-post - Ask Larry to post to Discord
+# Usage: discord-post <channel> <message>
+# Example: discord-post "#announcements" "Shipped the feature!"
+
+set -e
+
+if [ $# -lt 2 ]; then
+  echo "Usage: discord-post <channel> <message>"
+  echo ""
+  echo "Examples:"
+  echo "  discord-post \"#announcements\" \"Shipped the new feature!\""
+  echo "  discord-post \"#larrys-gym\" \"Another skill acquired\""
+  exit 1
+fi
+
+channel="$1"
+shift
+message="$*"
+
+# Get current project name if in a git repo
+project=""
+if git rev-parse --git-dir > /dev/null 2>&1; then
+  project=$(basename "$(git rev-parse --show-toplevel)")
+fi
+
+# Build the wake message
+wake_text="📢 DISCORD_POST $channel"
+if [ -n "$project" ]; then
+  wake_text="$wake_text (from $project)"
+fi
+wake_text="$wake_text: $message"
+
+clawdbot system event --text "$wake_text" --mode now
+echo "✅ Asked Larry to post to $channel: $message"
