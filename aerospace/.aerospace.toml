@@ -11,7 +11,8 @@ enable-normalization-flatten-containers = false
 enable-normalization-opposite-orientation-for-nested-containers = false
 
 # Mouse follows focus when focused monitor changes
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+# on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+on-focused-monitor-changed = []
 
 # Possible values: tiles|accordion
 default-root-container-layout = 'tiles'
@@ -78,6 +79,17 @@ alt-5 = 'workspace music'
 alt-6 = 'workspace rabby_mail'
 alt-7 = 'workspace mac_messages'
 alt-8 = 'workspace top_screen'
+
+persistent-workspaces = [
+  'terminal',
+  'slack',
+  'misc',
+  'tg_brave',
+  'music',
+  'rabby_mail',
+  'mac_messages',
+  'top_screen',
+]
 
 alt-shift-1 = 'move-node-to-workspace terminal'
 alt-shift-2 = 'move-node-to-workspace slack'
@@ -170,3 +182,14 @@ run = ['layout tiling', 'move-node-to-workspace mac_messages']
 if.app-id = 'com.vivaldi.Vivaldi'
 check-further-callbacks = true
 run = ['layout tiling', 'move-node-to-workspace top_screen']
+
+# League of Legends / Client 
+[[on-window-detected]]
+if.app-id = 'com.riotgames.LeagueofLegends.LeagueClientUx'
+check-further-callbacks = true
+run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.riotgames.LeagueofLegends.GameClient'
+check-further-callbacks = true
+run = ['layout floating', 'fullscreen']

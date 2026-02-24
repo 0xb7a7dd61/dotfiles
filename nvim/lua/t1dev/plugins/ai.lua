@@ -170,24 +170,24 @@ We'll repeat this cycle until the project compiles without errors. Ensure no dev
       })
     end,
   },
-  {
-    "zbirenbaum/copilot.lua",
-    opts = {
-      suggestion = {
-        debounce = 75,
-        keymap = {
-          accept = "<M-Down>",
-          accept_line = "<M-Right>",
-          accept_word = "<M-Up>",
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<M-Space>",
-        },
-      },
-      copilot_node_command = "node",
-      server_opts_overrides = {},
-    },
-  },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   opts = {
+  --     suggestion = {
+  --       debounce = 75,
+  --       keymap = {
+  --         accept = "<M-Down>",
+  --         accept_line = "<M-Right>",
+  --         accept_word = "<M-Up>",
+  --         next = "<M-]>",
+  --         prev = "<M-[>",
+  --         dismiss = "<M-Space>",
+  --       },
+  --     },
+  --     copilot_node_command = "node",
+  --     server_opts_overrides = {},
+  --   },
+  -- },
   -- Add statusline at the bottom for a spinner when code companion is processing a chat question
   {
     "nvim-lualine/lualine.nvim",
@@ -245,5 +245,4 @@ We'll repeat this cycle until the project compiles without errors. Ensure no dev
       table.insert(opts.sections.lualine_x, 2, M)
     end,
   },
-
 }

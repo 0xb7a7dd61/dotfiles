@@ -30,12 +30,6 @@ config.send_composed_key_when_left_alt_is_pressed = true
 config.send_composed_key_when_right_alt_is_pressed = true
 
 config.keys = {
-  -- Disable <C-l> so it can be used by nvim to pop up the integrated terminal
-  {
-    key = "-",
-    mods = "CTRL",
-    action = wezterm.action.DisableDefaultAssignment,
-  },
   -- Disable C-S-Left and C-S-Right so they can be used by tmux to switch between panes
   {
     key = "RightArrow",
